@@ -21,11 +21,12 @@ type Config struct {
 	DiscordToken   string   `json:"discord_token"`
 	ChannelIDs     []string `json:"channel_ids"`
 	Administrators []string `json:"administrators"`
+	BackendURL     string   `json:"backend_url"`
 }
 
 var config Config
 var rxRelaxed = xurls.Relaxed()
-var c = &gotenberg.Client{Hostname: "http://0.0.0.0:3000"}
+var c *gotenberg.Client
 
 const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
@@ -52,6 +53,8 @@ func main() {
 		log.Fatalf("No token available")
 		return
 	}
+
+	c = &gotenberg.Client{Hostname: config.BackendURL}
 
 	bot, err := discordgo.New("Bot " + token)
 	if err != nil {
