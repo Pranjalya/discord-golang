@@ -1,2 +1,2 @@
 # discord-golang
-A  simplistic Discord bot in Golang.
+A simplistic Discord bot in Golang.
